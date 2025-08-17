@@ -28,7 +28,7 @@ async function allFood(req, res) {
 async function showFoodDetails(req, res) {
     try {
         const food = await Food.findById(req.params.id)
-        if (track)
+        if (food)
             res.status(200).json(food)
         else
             res.sendStatus(404)
