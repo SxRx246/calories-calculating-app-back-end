@@ -5,6 +5,7 @@ const UserInfoController = require('../controllers/UserInfo')
 
 router.post('/new' , UserInfoController.createUserInfo)
 router.get('/:id' , UserInfoController.showUserInfoDetails)
+router.put('/:id',UserInfoController.updateUserInfo)
 
 
 

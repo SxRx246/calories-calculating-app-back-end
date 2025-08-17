@@ -26,8 +26,29 @@ const showUserInfoDetails = (async (req, res) => {
     }
 })
 
+const updateUserInfo = (async (req, res) => {
+    try {
+        const UserInfo = await UserInfo.findByIdAndUpdate(
+            req.params.id,
+            req.body,
+            { new: true }
+        )
+
+        if (UserInfo) {
+            res.status(200).json(UserInfo)
+        } else {
+            res.sendStatus(404)
+        }
+
+    } catch (error) {
+        res.status(500).json({ error: error.message })
+    }
+
+})
+
 
 module.exports = {
     createUserInfo,
-    showUserInfoDetails
+    showUserInfoDetails,
+    updateUserInfo,
 }
