@@ -5,7 +5,7 @@ const app = express();
 const mongoose = require('mongoose');
 const morgan = require('morgan');
 
-const foodRoutes = require('./routes/FoodRoutes') 
+const foodRoutes = require('./routes/foodRoutes') 
 
 
 mongoose.connect(process.env.MONGODB_URI);
