@@ -3,7 +3,10 @@ dotenv.config();
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
-const logger = require('morgan');
+const morgan = require('morgan');
+
+const foodRoutes = require('./routes/FoodRoutes') 
+
 
 mongoose.connect(process.env.MONGODB_URI);
 
@@ -12,7 +15,8 @@ mongoose.connection.on('connected', () => {
 });
 
 app.use(express.json());
-app.use(logger('dev'));
+app.use(morgan('dev'));
+app.use("/foods" , foodRoutes)
 
 // Routes go here
 
