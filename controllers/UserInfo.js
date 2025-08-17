@@ -12,8 +12,22 @@ const createUserInfo = (async (req, res) => {
 
 })
 
+const showUserInfoDetails = (async (req, res) => {
+    try {
+        const UserInfo = await UserInfo.findById(req.params.id)
+        if (UserInfo)
+            res.status(200).json(UserInfo)
+        else
+            res.sendStatus(404)
+    }
+    catch (error) {
+        console.log(error)
+        res.status(500).json({ error: error.message })
+    }
+})
 
 
 module.exports = {
-    createUserInfo
+    createUserInfo,
+    showUserInfoDetails
 }
