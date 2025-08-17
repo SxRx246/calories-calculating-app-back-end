@@ -48,3 +48,4 @@ const UserInfoSchema = mongoose.Schema({
 const UserInfo = mongoose.model('UserInfo', UserInfoSchema);
 
 module.exports = UserInfo
+
