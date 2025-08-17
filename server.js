@@ -6,8 +6,9 @@ const mongoose = require('mongoose');
 const morgan = require('morgan');
 
 const foodRoutes = require('./routes/foodRoutes') 
-
+const userInfoRoutes = require('./routes/userInfoRoutes')
 mongoose.connect(process.env.MONGODB_URI);
+// mongoose.connect(process.env.MONGODB_URI2);
 
 mongoose.connection.on('connected', () => {
   console.log(`Connected to MongoDB ${mongoose.connection.name}.`);
@@ -16,6 +17,7 @@ mongoose.connection.on('connected', () => {
 app.use(express.json());
 app.use(morgan('dev'));
 app.use("/foods" , foodRoutes)
+app.use("/userInfo" , userInfoRoutes)
 
 // Routes go here
 

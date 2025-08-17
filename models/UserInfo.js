@@ -4,8 +4,11 @@ const UserInfoSchema = mongoose.Schema({
 //   _id: ,
 //   userId: , 
 
-  name: String,
-  age: Number,
+  // name: String,
+  age: {
+    type: Number,
+    require: true
+  },
 
   gender: {
     type: String,

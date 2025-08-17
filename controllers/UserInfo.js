@@ -1,4 +1,4 @@
-const UserInfo = require('../models/Food')
+const UserInfo = require('../models/UserInfo')
 
 const createUserInfo = (async (req, res) => {
     try {
@@ -14,9 +14,9 @@ const createUserInfo = (async (req, res) => {
 
 const showUserInfoDetails = (async (req, res) => {
     try {
-        const UserInfo = await UserInfo.findById(req.params.id)
-        if (UserInfo)
-            res.status(200).json(UserInfo)
+        const userDetails = await UserInfo.findById(req.params.id)
+        if (userDetails)
+            res.status(200).json(userDetails)
         else
             res.sendStatus(404)
     }
@@ -28,14 +28,14 @@ const showUserInfoDetails = (async (req, res) => {
 
 const updateUserInfo = (async (req, res) => {
     try {
-        const UserInfo = await UserInfo.findByIdAndUpdate(
+        const updatedInfo = await UserInfo.findByIdAndUpdate(
             req.params.id,
             req.body,
             { new: true }
         )
 
-        if (UserInfo) {
-            res.status(200).json(UserInfo)
+        if (updatedInfo) {
+            res.status(200).json(updatedInfo)
         } else {
             res.sendStatus(404)
         }
