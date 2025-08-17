@@ -11,6 +11,21 @@ async function createFood(req, res) {
     }
 }
 
+async function allFood(req, res) {
+    try {
+        const allFoods = await Food.find()
+        if (allFoods.length)
+            res.status(200).json(allFoods)
+        else
+            res.sendStatus(204)
+    }
+    catch (error) {
+        console.log(error)
+        res.status(500).json({ error: error.message })
+    }
+}
+
 module.exports = {
-    createFood
+    createFood,
+    allFood
 }
