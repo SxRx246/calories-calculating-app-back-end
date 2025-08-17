@@ -25,7 +25,7 @@ const FoodSchema = new Schema ({
         require: true
     },
     picture:{
-        type: File
+        type: String
     }
 
 })
