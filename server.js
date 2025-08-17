@@ -4,6 +4,7 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const morgan = require('morgan');
+const cors = require('cors')
 
 const foodRoutes = require('./routes/foodRoutes') 
 const userInfoRoutes = require('./routes/userInfoRoutes')
