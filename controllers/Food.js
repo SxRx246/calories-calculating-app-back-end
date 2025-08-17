@@ -25,7 +25,22 @@ async function allFood(req, res) {
     }
 }
 
+async function showFoodDetails(req, res) {
+    try {
+        const food = await Food.findById(req.params.id)
+        if (track)
+            res.status(200).json(food)
+        else
+            res.sendStatus(404)
+    }
+    catch (error) {
+        console.log(error)
+        res.status(500).json({ error: error.message })
+    }
+}
+
 module.exports = {
     createFood,
-    allFood
+    allFood,
+    showFoodDetails
 }
