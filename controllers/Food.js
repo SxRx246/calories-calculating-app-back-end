@@ -62,7 +62,7 @@ const deleteFood = (async (req, res) => {
 
 const updatedFood = (async (req, res) => {
     try {
-        const food = await food.findByIdAndUpdate(
+        const food = await Food.findByIdAndUpdate(
             req.params.id,
             req.body,
             { new: true }
