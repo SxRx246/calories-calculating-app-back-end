@@ -1,9 +1,13 @@
 const express = require('express')
 const router = express.Router()
-const foodController = require('../controllers/Food')
 
+const FoodController = require('../controllers/Food')
 
-router.put('/:id',foodController.updatedFood)
-router.delete('/:id',foodController.deleteFood)
+router.post('/new' , FoodController.createFood)
+router.get('/' , FoodController.allFood)
+router.get('/:id' , FoodController.showFoodDetails)
+router.put('/:id',FoodController.updatedFood)
+router.delete('/:id',FoodController.deleteFood)
+
 
 module.exports = router
