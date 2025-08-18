@@ -4,7 +4,10 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const morgan = require('morgan');
+const path = require("path");
 const cors = require('cors')
+
+
 
 const foodRoutes = require('./routes/foodRoutes') 
 const userInfoRoutes = require('./routes/userInfoRoutes')
@@ -18,10 +21,13 @@ app.use(cors({origin: 'http://localhost:5173'}))
 
 app.use(express.json());
 app.use(morgan('dev'));
-app.use("/foods" , foodRoutes)
-app.use("/userInfo" , userInfoRoutes)
+app.use(cors({origin: 'http://localhost:5173'}))
+
 
 // Routes go here
+app.use("/foods" , foodRoutes)
+app.use("/userInfo" , userInfoRoutes)
+app.use("/uploads", express.static(path.join(__dirname, "uploads")))
 
 app.listen(3000, () => {
   console.log('The express app is ready!');

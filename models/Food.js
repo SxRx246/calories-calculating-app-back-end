@@ -9,7 +9,22 @@ const FoodSchema = new Schema ({
     category: {
         type: String,
         require: true,
-        enum:["Fruits", "vegetable" , "Restaurant Food" , "Branding Product" , "Nuts"]
+         enum: [
+        "Fruits",
+        "Vegetables",
+        "Grains & Cereals",
+        "Legumes & Beans",
+        "Nuts & Seeds",
+        "Dairy & Eggs",
+        "Meat & Poultry",
+        "Fish & Seafood",
+        "Oils & Fats",
+        "Snacks & Sweets",
+        "Beverages",
+        "Soups & Sauces",
+        "Fast Food / Restaurant Food",
+        "Branded Products"
+      ]
     },
     serving_qty: {
         type: Number,
