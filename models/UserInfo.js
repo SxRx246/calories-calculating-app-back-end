@@ -1,35 +1,41 @@
 const mongoose = require('mongoose')
 
 const UserInfoSchema = mongoose.Schema({
-//   _id: ,
-//   userId: , 
+  //   _id: ,
+  //   userId: , 
 
   // name: String,
   age: {
     type: Number,
-    require: true
+    required: true
   },
 
   gender: {
     type: String,
-    enum: ["male", "female"], 
+    enum: ["male", "female"],
     required: true
   },
 
   height: {
-    value: Number, 
+    value: {
+      type: Number,
+      required: true
+    },
     unit: {
       type: String,
-      enum: ["cm", "ft"], 
+      enum: ["cm", "ft"],
       default: "cm"
     }
   },
 
   weight: {
-    value: Number, 
+    value: {
+      type: Number,
+      required: true
+    },
     unit: {
       type: String,
-      enum: ["kg", "lb"], 
+      enum: ["kg", "lb"],
       default: "kg"
     }
   },

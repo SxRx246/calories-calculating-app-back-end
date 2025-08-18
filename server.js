@@ -12,11 +12,12 @@ const cors = require('cors')
 const foodRoutes = require('./routes/foodRoutes') 
 const userInfoRoutes = require('./routes/userInfoRoutes')
 mongoose.connect(process.env.MONGODB_URI);
-// mongoose.connect(process.env.MONGODB_URI2);
 
 mongoose.connection.on('connected', () => {
   console.log(`Connected to MongoDB ${mongoose.connection.name}.`);
 });
+
+app.use(cors({origin: 'http://localhost:5173'}))
 
 app.use(express.json());
 app.use(morgan('dev'));
