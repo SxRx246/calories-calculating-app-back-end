@@ -1,16 +1,22 @@
 const Food = require('../models/Food')
 
-const createFood = (async (req, res) => {
+const createFood = async (req, res) => {
     try {
-        const createdFood = await Food.create(req.body)
-        res.status(201).json(createdFood)
-    }
-    catch (error) {
+        const foodData = {
+            ...req.body
+        }
+
+        if (req.file) {
+            foodData.picture = `/uploads/${req.file.filename}`
+        }
+
+        const food = await Food.create(foodData)
+        res.status(201).json(food)
+    } catch (error) {
         console.log(error)
         res.status(500).json({ error: error.message })
     }
-
-})
+}
 
 
 const allFood = (async (req, res) => {
@@ -61,7 +67,14 @@ const deleteFood = (async (req, res) => {
 })
 
 const updatedFood = (async (req, res) => {
+
     try {
+        const updateData = { ...req.body }
+
+        if (req.file) {
+            updateData.picture = `/uploads/${req.file.filename}`
+        }
+
         const food = await Food.findByIdAndUpdate(
             req.params.id,
             req.body,
