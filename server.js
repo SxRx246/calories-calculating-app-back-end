@@ -17,7 +17,6 @@ mongoose.connection.on('connected', () => {
   console.log(`Connected to MongoDB ${mongoose.connection.name}.`);
 });
 
-app.use(cors({origin: 'http://localhost:5173'}))
 
 app.use(express.json());
 app.use(morgan('dev'));
@@ -26,7 +25,7 @@ app.use(cors({origin: 'http://localhost:5173'}))
 
 // Routes go here
 app.use("/foods" , foodRoutes)
-app.use("/userInfo" , userInfoRoutes)
+app.use("/user-info" , userInfoRoutes)
 app.use("/uploads", express.static(path.join(__dirname, "uploads")))
 
 app.listen(3000, () => {
