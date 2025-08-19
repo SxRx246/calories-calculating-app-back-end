@@ -12,6 +12,7 @@ const cors = require('cors')
 const foodRoutes = require('./routes/foodRoutes') 
 const userInfoRoutes = require('./routes/userInfoRoutes')
 const authRoutes = require('./routes/authRoutes')
+const FoodPerDayRoutes = require('./routes/foodPerDayRoutes')
 
 mongoose.connect(process.env.MONGODB_URI);
 
@@ -25,6 +26,7 @@ app.use(morgan('dev'));
 
 // Routes go here
 app.use('/auth', authRoutes)
+app.use("/foods-per-day" , FoodPerDayRoutes)
 app.use("/foods" , foodRoutes)
 app.use("/user-info" , userInfoRoutes)
 app.use("/uploads", express.static(path.join(__dirname, "uploads")))
