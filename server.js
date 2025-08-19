@@ -18,13 +18,12 @@ mongoose.connection.on('connected', () => {
 });
 
 app.use(cors({origin: 'http://localhost:5173'}))
-
 app.use(express.json());
 app.use(morgan('dev'));
 
 // Routes go here
 app.use("/foods" , foodRoutes)
-app.use("/userInfo" , userInfoRoutes)
+app.use("/user-info" , userInfoRoutes)
 app.use("/uploads", express.static(path.join(__dirname, "uploads")))
 
 app.listen(3000, () => {
