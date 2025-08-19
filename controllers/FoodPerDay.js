@@ -1,4 +1,3 @@
-// controllers/FoodPerDay.js
 const FoodPerDay = require('../models/FoodPerDay');
 
 const addFoodForDay = async (req, res) => {
@@ -12,8 +11,8 @@ const addFoodForDay = async (req, res) => {
         }
 
         foodPerDay.foods.push({ foodId, quantity });
-        await foodPerDay.calculateTotalCalories(); // Update total calories
-        await foodPerDay.save(); // Save the document
+        await foodPerDay.calculateTotalCalories(); 
+        await foodPerDay.save(); 
 
         res.status(201).json({ message: 'Food added successfully!', foodPerDay });
     } catch (error) {
@@ -41,7 +40,7 @@ const getFoodForDay = async (req, res) => {
 
 const updateFoodForDay = async (req, res) => {
     const userId = req.params.userId;
-    const { foods } = req.body; // Expecting an array of food items
+    const { foods } = req.body; 
 
     try {
         const foodPerDay = await FoodPerDay.findOne({ userId, date: new Date().toDateString() });
@@ -50,9 +49,9 @@ const updateFoodForDay = async (req, res) => {
             return res.status(404).json({ message: 'No food log found for this day.' });
         }
 
-        foodPerDay.foods = foods; // Update the foods array
-        await foodPerDay.calculateTotalCalories(); // Update total calories
-        await foodPerDay.save(); // Save the document
+        foodPerDay.foods = foods; 
+        await foodPerDay.calculateTotalCalories(); 
+        await foodPerDay.save(); 
 
         res.status(200).json({ message: 'Food log updated successfully!', foodPerDay });
     } catch (error) {

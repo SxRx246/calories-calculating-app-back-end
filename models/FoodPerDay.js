@@ -1,10 +1,15 @@
-// models/FoodPerDay.js
 const { Schema, model } = require('mongoose');
-const Food = require('./Food'); // Adjust the path as necessary
-
+const Food = require('./Food');
 const foodItemSchema = new Schema({
-    foodId: { type: Schema.Types.ObjectId, ref: 'Food', required: true }, // Reference to Food model
-    quantity: { type: Number, required: true }, // Quantity of the food item consumed
+    foodId: {
+        type: Schema.Types.ObjectId,
+        ref: 'Food',
+        required: true
+    },
+    quantity: {
+        type: Number,
+        required: true
+    }
 });
 
 const foodPerDaySchema = new Schema({
@@ -13,7 +18,7 @@ const foodPerDaySchema = new Schema({
         required: true,
         default: Date.now,
     },
-    foods: [foodItemSchema], // Array of food items for the day
+    foods: [foodItemSchema], 
     totalCalories: {
         type: Number,
         default: 0,
@@ -22,21 +27,20 @@ const foodPerDaySchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'User',
         required: true,
-    }, // Reference to the user
+    }, 
 });
 
-// Method to calculate total calories based on added foods
-foodPerDaySchema.methods.calculateTotalCalories = async function() {
+foodPerDaySchema.methods.calculateTotalCalories = async function () {
     this.totalCalories = 0;
 
     for (const item of this.foods) {
         const food = await Food.findById(item.foodId);
         if (food) {
-            this.totalCalories += food.calories * item.quantity; // Calculate based on quantity
+            this.totalCalories += food.calories * item.quantity; 
         }
     }
 
-    await this.save(); // Save the updated total calories
+    await this.save(); 
 };
 
 const FoodPerDay = model('FoodPerDay', foodPerDaySchema);
