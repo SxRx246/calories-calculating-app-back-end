@@ -3,7 +3,8 @@ const Food = require('../models/Food')
 const createFood = async (req, res) => {
     try {
         const foodData = {
-            ...req.body
+            ...req.body,
+            user_id: req.user.id
         }
 
         if (req.file) {
@@ -21,7 +22,7 @@ const createFood = async (req, res) => {
 
 const allFood = (async (req, res) => {
     try {
-        const allFoods = await Food.find()
+        const allFoods = await Food.find().populate('user_id');
         if (allFoods.length)
             res.status(200).json(allFoods)
         else
@@ -37,7 +38,7 @@ const allFood = (async (req, res) => {
 
 const showFoodDetails = (async (req, res) => {
     try {
-        const food = await Food.findById(req.params.id)
+        const food = await Food.findById(req.params.id).populate('user_id');
         if (food)
             res.status(200).json(food)
         else
@@ -80,6 +81,10 @@ const updatedFood = (async (req, res) => {
             req.body,
             { new: true }
         )
+
+        if (food.user_id.toString() !== req.user.id) {
+            return res.status(403).json({ message: 'Access denied' });
+        }
 
         if (food) {
             res.status(200).json(food)
