@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const FoodPerDayController = require('../controllers/FoodPerDay');
 
-router.post('/new', FoodPerDayController.addFoodForDay);
+router.post('/add', FoodPerDayController.addFoodForDay);
 
 router.get('/:userId', FoodPerDayController.getFoodForDay);
 
