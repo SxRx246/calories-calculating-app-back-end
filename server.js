@@ -12,7 +12,6 @@ const cors = require('cors')
 const foodRoutes = require('./routes/foodRoutes') 
 const userInfoRoutes = require('./routes/userInfoRoutes')
 const authRoutes = require('./routes/authRoutes')
-const FoodPerDayRoutes = require('./routes/foodPerDayRoutes')
 
 mongoose.connect(process.env.MONGODB_URI);
 
@@ -20,13 +19,12 @@ mongoose.connection.on('connected', () => {
   console.log(`Connected to MongoDB ${mongoose.connection.name}.`);
 });
 
-app.use(cors({origin: 'http://localhost:5173'}))
+app.use(cors());
 app.use(express.json());
 app.use(morgan('dev'));
 
 // Routes go here
 app.use('/auth', authRoutes)
-app.use("/foods-per-day" , FoodPerDayRoutes)
 app.use("/foods" , foodRoutes)
 app.use("/user-info" , userInfoRoutes)
 app.use("/uploads", express.static(path.join(__dirname, "uploads")))

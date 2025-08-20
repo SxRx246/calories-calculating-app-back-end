@@ -4,13 +4,11 @@ const createFood = async (req, res) => {
     try {
         console.log('Request Body:', req.body);
         console.log('Authenticated User:', req.user);
-        // const userId = req.user?.id; 
-        if (!req.body.userId) {
-            return res.status(400).json({ error: 'User ID is required' });
-        }
+        const userId = req.user?.id; 
+        
         const foodData = {
             ...req.body,
-            userId: req.body.userId
+            userId: userId
         }
 
 
