@@ -1,7 +1,7 @@
 const { Schema, model } = require('mongoose');
 const Food = require('./Food');
 const foodItemSchema = new Schema({
-    foodId: {
+    food: {
         type: Schema.Types.ObjectId,
         ref: 'Food',
         required: true
@@ -34,7 +34,7 @@ foodPerDaySchema.methods.calculateTotalCalories = async function () {
     this.totalCalories = 0;
 
     for (const item of this.foods) {
-        const food = await Food.findById(item.foodId);
+        const food = await Food.findById(item.food);
         if (food) {
             this.totalCalories += food.calories * item.quantity; 
         }
