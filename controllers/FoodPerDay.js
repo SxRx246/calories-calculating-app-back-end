@@ -3,6 +3,10 @@ const FoodPerDay = require('../models/FoodPerDay');
 const addFoodForDay = async (req, res) => {
     const { userId, foodId, quantity } = req.body;
 
+    if (!userId || !foodId || !quantity) {
+        return res.status(400).json({ message: "Missing required fields." });
+    }
+
     try {
         const getToday = () => {
             const today = new Date();
@@ -15,7 +19,7 @@ const addFoodForDay = async (req, res) => {
             foodPerDay = new FoodPerDay({ userId, date: getToday() });
         }
 
-        foodPerDay.foods.push({ foodId, quantity });
+        foodPerDay.foods.push({ food: foodId, quantity });
         await foodPerDay.calculateTotalCalories();
         await foodPerDay.save();
 
