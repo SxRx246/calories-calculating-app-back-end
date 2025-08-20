@@ -9,7 +9,7 @@ const cors = require('cors')
 
 
 
-const foodRoutes = require('./routes/foodRoutes') 
+const foodRoutes = require('./routes/FoodRoutes') 
 const userInfoRoutes = require('./routes/userInfoRoutes')
 const authRoutes = require('./routes/authRoutes')
 const foodPerDayRoutes = require('./routes/foodPerDayRoutes')
