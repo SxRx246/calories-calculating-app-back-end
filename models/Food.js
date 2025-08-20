@@ -25,11 +25,13 @@ const FoodSchema = new Schema({
             "Fast Food / Restaurant Food",
             "Branded Products"
         ]
-    },
-    serving_qty: {
-        type: Number,
-        require: true
-    },
+    }
+    // ,
+    // serving_qty: {
+    //     type: Number,
+    //     require: true
+    // }
+    ,
     serving_size: {
         type: Number,
         require: true
