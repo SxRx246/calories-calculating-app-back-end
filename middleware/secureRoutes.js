@@ -11,6 +11,7 @@ module.exports = function secureRoute(req, res, next) {
 
   jwt.verify(token, SECRET, (err, decoded) => {
     if (err) {
+      console.error('Token verification error:', err.message);
       return res.status(403).json({ message: 'Invalid token' })
     }
     req.user = decoded // makes user ID available in req.user.id

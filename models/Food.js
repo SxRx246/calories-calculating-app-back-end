@@ -42,8 +42,8 @@ const FoodSchema = new Schema({
     picture: {
         type: String
     },
-    user_id: {
-        type: mongoose.Schema.Types.ObjectId,
+    userId: {
+        type: Schema.Types.ObjectId,
         ref: 'User', 
         required: true
     }

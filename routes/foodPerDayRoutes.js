@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const FoodPerDayController = require('../controllers/FoodPerDay'); // Adjust the path as necessary
+const FoodPerDayController = require('../controllers/FoodPerDay');
 
 router.post('/new', FoodPerDayController.addFoodForDay);
 

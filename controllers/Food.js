@@ -2,10 +2,18 @@ const Food = require('../models/Food')
 
 const createFood = async (req, res) => {
     try {
+        console.log('Request Body:', req.body);
+        console.log('Authenticated User:', req.user);
+        const userId = req.user?.id; 
+        if (!req.body.userId) {
+            return res.status(400).json({ error: 'User ID is required' });
+        }
         const foodData = {
             ...req.body,
-            user_id: req.user.id
+            userId: req.body.userId
         }
+
+
 
         if (req.file) {
             foodData.picture = `/uploads/${req.file.filename}`
@@ -22,7 +30,7 @@ const createFood = async (req, res) => {
 
 const allFood = (async (req, res) => {
     try {
-        const allFoods = await Food.find().populate('user_id');
+        const allFoods = await Food.find().populate('userId');
         if (allFoods.length)
             res.status(200).json(allFoods)
         else
@@ -38,7 +46,7 @@ const allFood = (async (req, res) => {
 
 const showFoodDetails = (async (req, res) => {
     try {
-        const food = await Food.findById(req.params.id).populate('user_id');
+        const food = await Food.findById(req.params.id).populate('userId');
         if (food)
             res.status(200).json(food)
         else
@@ -82,7 +90,7 @@ const updatedFood = (async (req, res) => {
             { new: true }
         )
 
-        if (food.user_id.toString() !== req.user.id) {
+        if (food.userId.toString() !== req.user.id) {
             return res.status(403).json({ message: 'Access denied' });
         }
 
