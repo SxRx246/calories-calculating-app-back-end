@@ -35,11 +35,12 @@ foodPerDaySchema.methods.calculateTotalCalories = async function () {
 
     for (const item of this.foods) {
         const food = await Food.findById(item.food);
+        console.log('Calculating calories for food:', food);
         if (food) {
             this.totalCalories += food.calories * item.quantity; 
         }
     }
-
+    console.log('Total calories calculated:', this.totalCalories);
     await this.save(); 
 };
 
