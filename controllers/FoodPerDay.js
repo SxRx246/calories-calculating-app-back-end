@@ -4,15 +4,20 @@ const addFoodForDay = async (req, res) => {
     const { userId, foodId, quantity } = req.body;
 
     try {
-        let foodPerDay = await FoodPerDay.findOne({ userId, date: new Date().toDateString() });
+        const getToday = () => {
+            const today = new Date();
+            today.setHours(0, 0, 0, 0); // midnight
+            return today;
+        };
+        let foodPerDay = await FoodPerDay.findOne({ userId, date: getToday() });
 
         if (!foodPerDay) {
-            foodPerDay = new FoodPerDay({ userId });
+            foodPerDay = new FoodPerDay({ userId, date: getToday() });
         }
 
         foodPerDay.foods.push({ foodId, quantity });
-        await foodPerDay.calculateTotalCalories(); 
-        await foodPerDay.save(); 
+        await foodPerDay.calculateTotalCalories();
+        await foodPerDay.save();
 
         res.status(201).json({ message: 'Food added successfully!', foodPerDay });
     } catch (error) {
@@ -40,7 +45,7 @@ const getFoodForDay = async (req, res) => {
 
 const updateFoodForDay = async (req, res) => {
     const userId = req.params.userId;
-    const { foods } = req.body; 
+    const { foods } = req.body;
 
     try {
         const foodPerDay = await FoodPerDay.findOne({ userId, date: new Date().toDateString() });
@@ -49,9 +54,9 @@ const updateFoodForDay = async (req, res) => {
             return res.status(404).json({ message: 'No food log found for this day.' });
         }
 
-        foodPerDay.foods = foods; 
-        await foodPerDay.calculateTotalCalories(); 
-        await foodPerDay.save(); 
+        foodPerDay.foods = foods;
+        await foodPerDay.calculateTotalCalories();
+        await foodPerDay.save();
 
         res.status(200).json({ message: 'Food log updated successfully!', foodPerDay });
     } catch (error) {
