@@ -1,4 +1,4 @@
-![Sip and Skip - Calorie Tracker Backend]
+# Sip and Skip - Calorie Tracker Backend
 
 ## Description
 
