@@ -8,6 +8,6 @@ router.get('/:userId', FoodPerDayController.getFoodForDay);
 
 router.put('/:userId', FoodPerDayController.updateFoodForDay);
 
-router.delete('/:userId', FoodPerDayController.deleteFoodForDay);
+router.delete('/:userId/food/:foodId', FoodPerDayController.deleteFoodForDay);
 
 module.exports = router;

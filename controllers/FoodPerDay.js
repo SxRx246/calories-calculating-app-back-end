@@ -73,33 +73,31 @@ const updateFoodForDay = async (req, res) => {
 
 const deleteFoodForDay = async (req, res) => {
     const userId = req.params.userId;
-    const { foodId } = req.body;
+    const foodId = req.params.foodId;
 
     if (!foodId) {
         return res.status(400).json({ message: "Missing foodId to delete." });
     }
 
     try {
-        const foodPerDay = await FoodPerDay.findOneAndDelete({ userId, date: getToday() });
+        const foodPerDay = await FoodPerDay.findOne({ userId, date: getToday() });
 
         if (!foodPerDay) {
             return res.status(404).json({ message: 'No food log found for this day.' });
         }
 
-            // Filter out the food to delete
-    foodPerDay.foods = foodPerDay.foods.filter(
-      (item) => item.food.toString() !== foodId
-    );
+        foodPerDay.foods = foodPerDay.foods.filter(f => f.food.toString() !== foodId);
 
-    await foodPerDay.calculateTotalCalories();
-    await foodPerDay.save();
+        await foodPerDay.calculateTotalCalories();
+        await foodPerDay.save();
 
-        res.status(200).json({ message: 'Food log deleted successfully!' });
+        res.status(200).json({ message: 'Food deleted successfully!' });
     } catch (error) {
         console.log(error);
         res.status(500).json({ error: error.message });
     }
 };
+
 
 module.exports = {
     addFoodForDay,
